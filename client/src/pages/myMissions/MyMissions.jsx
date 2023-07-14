@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MyGigs.scss";
+import "./MyMissions.scss";
 import getCurrentUser from "../../utils/getCurrentUser";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 
-function MyGigs() {
+function MyMissions() {
   const currentUser = getCurrentUser();
 
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["myGigs"],
+    queryKey: ["myMissions"],
     queryFn: () =>
-    newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => {
+    newRequest.get(`/missions?userId=${currentUser._id}`).then((res) => {
       return res.data;
 
     }),
@@ -21,19 +21,19 @@ function MyGigs() {
 
   const mutation = useMutation({
     mutationFn: (id) => {
-      return newRequest.delete(`/gigs/${id}`);
+      return newRequest.delete(`/missions/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["myGigs"]);
+      queryClient.invalidateQueries(["myMissions"]);
     },
   });
 
   const handleDelete = (id) => {
     mutation.mutate(id);
   };
-console.log("Gigs Data:", data);
+console.log("Missions Data:", data);
   return (
-    <div className="myGigs">
+    <div className="myMissions">
       {isLoading ? (
         "loading"
       ) : error ? (
@@ -57,21 +57,21 @@ console.log("Gigs Data:", data);
               <th>Viewers</th>
               <th>Action</th>
              </tr>
-            {data.map((gig) => (
-              <tr key={gig._id}>
+            {data.map((mission) => (
+              <tr key={mission._id}>
                 <td>
-                  <img className="image" src={gig.cover} alt="" />
+                  <img className="image" src={mission.cover} alt="" />
                   
                 </td>
-                <td>{gig.title}</td>
-                <td>{gig.price}</td>
-                <td>{gig.sales}</td>
+                <td>{mission.title}</td>
+                <td>{mission.price}</td>
+                <td>{mission.sales}</td>
                 <td>
                   <img
                     className="delete"
                     src="./img/delete.png"
                     alt=""
-                    onClick={() => handleDelete(gig._id)}
+                    onClick={() => handleDelete(mission._id)}
                   />
                 </td>
               </tr>
@@ -86,4 +86,4 @@ console.log("Gigs Data:", data);
   );
 }
 
-export default MyGigs;
+export default MyMissions;

@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/", verifyToken, createReview )
-router.get("/:gigId", getReviews )
+router.get("/:missionId", getReviews )
 router.delete("/:id", deleteReview)
 
 export default router;

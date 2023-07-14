@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
 import "./Add.scss";
-import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
+import { missionReducer, INITIAL_STATE } from "../../reducers/missionReducer";
 import upload from "../../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
@@ -11,7 +11,7 @@ const Add = () => {
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
 
-  const [state, dispatch] = useReducer(gigReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(missionReducer, INITIAL_STATE);
 
   const handleChange = (e) => {
     dispatch({
@@ -51,18 +51,18 @@ const Add = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (gig) => {
-      return newRequest.post("/gigs", gig);
+    mutationFn: (mission) => {
+      return newRequest.post("/missions", mission);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["myGigs"]);
+      queryClient.invalidateQueries(["myMissions"]);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate(state);
-     navigate("/mygigs")
+     navigate("/mymissions")
   };
   
 

@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const OrderSchema = new Schema(
   {
-    gigId: {
+    missionId: {
       type: String,
       required: true,
     },

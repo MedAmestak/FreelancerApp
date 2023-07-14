@@ -1,18 +1,18 @@
 import React from "react";
-import "./Gig.scss";
+import "./Mission.scss";
 import { Slider } from "infinite-react-carousel/lib";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 
-function Gig() {
+function Mission() {
   const { id } = useParams();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["gig"],
+    queryKey: ["mission"],
     queryFn: () =>
-      newRequest.get(`/gigs/single/${id}`).then((res) => {
+      newRequest.get(`/missions/single/${id}`).then((res) => {
         return res.data;
       }),
   });
@@ -33,7 +33,7 @@ function Gig() {
   });
 
   return (
-    <div className="gig">
+    <div className="mission">
       {isLoading ? (
         "loading"
       ) : error ? (
@@ -130,7 +130,7 @@ function Gig() {
                 </div>
               </div>
             )}
-            <Reviews gigId={id} />
+            <Reviews missionId={id} />
           </div>
           <div className="right">
             <div className="price">
@@ -166,4 +166,4 @@ function Gig() {
   );
 }
 
-export default Gig;
+export default Mission;

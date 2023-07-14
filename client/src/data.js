@@ -108,7 +108,7 @@ export const projects = [
   },
 ];
 
-export const gigs = [
+export const missions = [
   {
     id: 1,
     img: "https://images.pexels.com/photos/580151/pexels-photo-580151.jpeg?auto=compress&cs=tinysrgb&w=1600",

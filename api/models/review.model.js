@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const ReviewSchema = new Schema(
   {
-    gigId: {
+    missionId: {
       type: String,
       required: true,
     },

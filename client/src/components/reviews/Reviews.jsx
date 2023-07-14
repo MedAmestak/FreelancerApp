@@ -3,13 +3,13 @@ import React from "react";
 import newRequest from "../../utils/newRequest";
 import Review from "../review/Review";
 import "./Reviews.scss";
-const Reviews = ({ gigId }) => {
+const Reviews = ({ missionId }) => {
 
   const queryClient = useQueryClient()
   const { isLoading, error, data } = useQuery({
     queryKey: ["reviews"],
     queryFn: () =>
-      newRequest.get(`/reviews/${gigId}`).then((res) => {
+      newRequest.get(`/reviews/${missionId}`).then((res) => {
         return res.data;
       }),
   });
@@ -27,7 +27,7 @@ const Reviews = ({ gigId }) => {
     e.preventDefault();
     const desc = e.target[0].value;
     const star = e.target[1].value;
-    mutation.mutate({ gigId, desc, star });
+    mutation.mutate({ missionId, desc, star });
   };
 
   return (

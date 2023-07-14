@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Gigs.scss";
-import GigCard from "../../components/gigCard/GigCard";
+import "./Missions.scss";
+import MissionCard from "../../components/missionCard/MissionCard";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
 
-function Gigs() {
+function Missions() {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
@@ -14,11 +14,11 @@ function Gigs() {
   const { search } = useLocation();
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["gigs"],
+    queryKey: ["missions"],
     queryFn: () =>
       newRequest
         .get(
-          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
+          `/missions${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((res) => {
           return res.data;
@@ -41,7 +41,7 @@ function Gigs() {
   };
 
   return (
-    <div className="gigs">
+    <div className="missions">
       <div className="container">
         <span className="breadcrumbs">Web Developement/Graphics & Design and much more</span>
         <h1>Discover Exciting Missions </h1>
@@ -76,11 +76,11 @@ function Gigs() {
             ? "loading"
             : error
             ? "Something went wrong!"
-            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
+            : data.map((mission) => <MissionCard key={mission._id} item={mission} />)}
         </div>
       </div>
     </div>
   );
 }
 
-export default Gigs;
+export default Missions;
