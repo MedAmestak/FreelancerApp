@@ -38,7 +38,6 @@ app.use("/api/messages", messageRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/modify-info", infoRoute);
 
-
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";

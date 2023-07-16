@@ -12,9 +12,15 @@ const Orders = () => {
     queryKey: ["orders"],
     queryFn: () =>
       newRequest.get(`/orders`).then((res) => {
+        console.log("Response:", res.data); // Add this line
         return res.data;
       }),
   });
+  
+  console.log("isLoading:", isLoading); // Add this line
+  console.log("error:", error); // Add this line
+  console.log("data:", data); // Add this line
+  
 
   const handleContact = async (order) => {
     const sellerId = order.sellerId;
@@ -24,12 +30,16 @@ const Orders = () => {
     try {
       const res = await newRequest.get(`/conversations/single/${id}`);
       navigate(`/message/${res.data.id}`);
+      window.scrollTo(0, 0);
+
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
           to: currentUser.seller ? buyerId : sellerId,
         });
         navigate(`/message/${res.data.id}`);
+        window.scrollTo(0, 0);
+
       }
     }
   };

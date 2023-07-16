@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 
+
 const MissionCard = ({ item }) => {
+
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
     queryFn: () =>
@@ -44,6 +46,7 @@ const MissionCard = ({ item }) => {
             <h2>$ {item.price}</h2>
           </div>
         </div>
+
       </div>
     </Link>
   );

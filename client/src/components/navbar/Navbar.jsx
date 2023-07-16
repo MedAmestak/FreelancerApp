@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
+
 import "./Navbar.scss";
 
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   const { pathname } = useLocation();
+
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -29,6 +32,7 @@ function Navbar() {
       await newRequest.post("/auth/logout");
       localStorage.removeItem("currentUser");
       navigate("/");
+      window.scrollTo(0, 0);
     } catch (err) {
       console.log(err);
     }

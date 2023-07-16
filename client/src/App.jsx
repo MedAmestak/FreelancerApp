@@ -14,6 +14,8 @@ import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyMissions from "./pages/myMissions/MyMissions";
 import ModifyInfo from "./pages/ModifyInfo/ModifyInfo"; 
+import { UserProvider } from "./UserContext";
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -27,11 +29,9 @@ function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <QueryClientProvider client={queryClient}>
-          <Navbar />
-          <Outlet />
-          <Footer />
-        </QueryClientProvider>
+        <Navbar />
+        <Outlet />
+        <Footer />
       </div>
     );
   };
@@ -97,7 +97,13 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </UserProvider>
+  );
 }
 
 export default App;

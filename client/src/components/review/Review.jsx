@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { UserContext } from "../../UserContext"; // Import the UserContext
 import newRequest from "../../utils/newRequest";
 import "./Review.scss";
 const Review = ({ review }) => {
+  const { userData } = useContext(UserContext); // Consume the UserContext
+
   const { isLoading, error, data } = useQuery(
     {
       queryKey: [review.userId],

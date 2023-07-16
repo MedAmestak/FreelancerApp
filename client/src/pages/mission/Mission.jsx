@@ -1,13 +1,14 @@
 import React from "react";
 import "./Mission.scss";
 import { Slider } from "infinite-react-carousel/lib";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 
 function Mission() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["mission"],
@@ -32,6 +33,73 @@ function Mission() {
     enabled: !!userId,
   });
 
+
+  const handleContact = async () => {
+    console.log('dataUser._id:', dataUser._id); // 
+
+    try {
+      // Check if a conversation already exists
+      const response = await newRequest.get(`/conversations/single/${dataUser._id}`);
+      const conversationId = response.data.id;
+
+      if (conversationId) {
+        // Conversation exists, send the message
+        await newRequest.post(`/messages`, {
+          conversationId,
+          desc: "Hello client! This is a message from the freelancer.",
+        });
+      } else {
+        // Conversation doesn't exist, create a new conversation and send the message
+        const createConversationResponse = await newRequest.post(`/conversations`, {
+          to: dataUser._id,
+        });
+        const newConversationId = createConversationResponse.data.id;
+
+        await newRequest.post(`/messages`, {
+          conversationId: newConversationId,
+          desc: "Hello client! This is a message from the freelancer.",
+        });
+      }
+
+      // Redirect to the message page
+      navigate(`/message/${dataUser._id}`);
+      window.scrollTo(0, 0);
+
+    } catch (error) {
+      console.log("Error sending message:", error);
+    }
+  };
+
+  const handleTestMissionSubmission = async () => {
+    //try {
+      // Make an API request to submit the gig without payment
+      //await newRequest.post(`/submit-mission/${id}`);
+
+      // Redirect the user to the orders tab
+      console.log('______')
+      navigate('/orders');
+      window.scrollTo(0, 0);
+
+//    } catch (error) {
+  //    console.log('Error submitting mission:', error);
+   // }
+  };
+
+  const makeRequest = async () => {
+    try {
+      await newRequest.post(
+        `/orders/submit-mission/${id}`
+      );
+      navigate("/orders")
+      window.scrollTo(0, 0);
+
+      //setClientSecret(res.data.clientSecret);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   return (
     <div className="mission">
       {isLoading ? (
@@ -42,7 +110,7 @@ function Mission() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-            FreelancerApp {">"} Graphics & Design {">"}
+              FreelancerApp {">"} Graphics & Design {">"}
             </span>
             <h1>{data.title}</h1>
             {isLoadingUser ? (
@@ -99,7 +167,7 @@ function Mission() {
                         </span>
                       </div>
                     )}
-                    <button>Contact Me</button>
+                    <button onClick={handleContact}>Contact Me</button>
                   </div>
                 </div>
                 <div className="box">
@@ -157,8 +225,11 @@ function Mission() {
               ))}
             </div>
             <Link to={`/pay/${id}`}>
-            <button>Continue</button>
+              <button>Continue</button>
             </Link>
+       
+              <button onClick={makeRequest}>Submit the Mission</button>
+
           </div>
         </div>
       )}

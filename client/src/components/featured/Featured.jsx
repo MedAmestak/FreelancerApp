@@ -8,6 +8,8 @@ function Featured() {
 
   const handleSubmit = () => {
     navigate(`/missions?search=${input}`);
+    window.scrollTo(0, 0);
+
   };
   return (
     <div className="featured">

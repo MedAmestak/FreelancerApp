@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
 
+
 const Add = () => {
   const [singleFile, setSingleFile] = useState(undefined);
   const [files, setFiles] = useState([]);
@@ -63,6 +64,8 @@ const Add = () => {
     e.preventDefault();
     mutation.mutate(state);
      navigate("/mymissions")
+     window.scrollTo(0, 0);
+
   };
   
 

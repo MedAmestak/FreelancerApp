@@ -64,3 +64,35 @@ export const confirm = async (req, res, next) => {
     next(err);
   }
 };
+
+export const submitMission = async (req, res, next) => {
+  try {
+    const id = req.params.id.trim()
+
+    console.log("Inside submitMission function"); 
+    console.log("id_____",id )// Add this line
+    const mission = await Mission.findById(id);
+    console.log("Mission:", mission); // Add this line
+
+
+    const newOrder = new Order({
+      missionId: mission._id,
+      img: mission.cover,
+      title: mission.title,
+      buyerId: id,
+      sellerId: mission.userId,
+      price: mission.price,
+      payment_intent: null, // Set payment_intent to null for gig submission without payment
+    });
+    console.log("New Order:", newOrder); // Add this line
+
+
+    await newOrder.save();
+
+    res.status(200).send({
+      orderId: newOrder._id, // Send the created order ID to the frontend
+    });
+  } catch (error) {
+    next(error);
+  }
+};

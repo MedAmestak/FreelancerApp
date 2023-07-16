@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./CatCard.scss";
 
 function CatCard({ card }) {
+
   return (
     <Link to="/missions?cat=design">
       <div className="catCard">

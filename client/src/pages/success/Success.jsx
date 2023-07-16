@@ -8,12 +8,15 @@ const Success = () => {
   const params = new URLSearchParams(search);
   const payment_intent = params.get("payment_intent");
 
+
   useEffect(() => {
     const makeRequest = async () => {
       try {
         await newRequest.put("/orders", { payment_intent });
         setTimeout(() => {
           navigate("/orders");
+          window.scrollTo(0, 0);
+
         }, 5000);
       } catch (err) {
         console.log(err);
@@ -31,4 +34,4 @@ const Success = () => {
   );
 };
 
-export default Success;
+export default Success;  

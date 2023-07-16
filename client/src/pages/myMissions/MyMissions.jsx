@@ -54,7 +54,7 @@ console.log("Missions Data:", data);
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
-              <th>Viewers</th>
+              <th>Views</th>
               <th>Action</th>
              </tr>
             {data.map((mission) => (
@@ -73,7 +73,16 @@ console.log("Missions Data:", data);
                     alt=""
                     onClick={() => handleDelete(mission._id)}
                   />
+              
+                  <img
+                    className="edit"
+                    src="./img/edit.png"
+                    alt=""
+                    onClick={() => handleEdit(mission._id)}
+                  />
+                
                 </td>
+               
               </tr>
 
             ))}

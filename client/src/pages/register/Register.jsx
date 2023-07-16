@@ -39,6 +39,8 @@ function Register() {
         img: url,
       });
       navigate("/")
+      window.scrollTo(0, 0);
+
     } catch (err) {
       console.log(err);
     }
@@ -63,9 +65,15 @@ function Register() {
             onChange={handleChange}
           />
           <label htmlFor="">Password</label>
-          <input name="password" type="password" onChange={handleChange} />
+          <input 
+           name="password" 
+           type="password" 
+           onChange={handleChange} />
           <label htmlFor="">Profile Picture</label>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <input 
+          type="file" 
+          onChange={(e) => setFile(e.target.files[0])} />
+
           <label htmlFor="">Country</label>
           <input
             name="country"

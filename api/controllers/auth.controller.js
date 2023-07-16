@@ -41,7 +41,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .send(info);
+      .send({ ...info, img: user.img });
   } catch (err) {
     next(err);
   }
