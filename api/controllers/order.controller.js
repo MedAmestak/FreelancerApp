@@ -75,9 +75,9 @@ export const submitMission = async (req, res, next) => {
     const id = req.params.id.trim()
 
     console.log("Inside submitMission function"); 
-    console.log("id_____",id )// Add this line
+    console.log("id_____",id )//
     const mission = await Mission.findById(id);
-    console.log("Mission:", mission); // Add this line
+    console.log("Mission:", mission); //
 
 
     const newOrder = new Order({
@@ -87,9 +87,9 @@ export const submitMission = async (req, res, next) => {
       buyerId: req.userId,
       sellerId: mission.userId,
       price: mission.price,
-      payment_intent: null, // Set payment_intent to null for mission submission without payment
+      payment_intent: null, // 
     });
-    console.log("New Order:", newOrder); // Add this line
+    console.log("New Order:", newOrder); //
 
 
     await newOrder.save();
