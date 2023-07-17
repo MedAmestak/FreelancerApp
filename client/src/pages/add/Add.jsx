@@ -100,11 +100,11 @@ const Add = () => {
                 {uploading ? "uploading" : "Upload"}
               </button>
             </div>
-            <label htmlFor="">More details about the project</label>
+            <label htmlFor="">Short Project Description</label>
             <textarea
               name="desc"
               id=""
-              placeholder="Share Your Project Details: Unlock Your Project's Potential"
+              placeholder="Short description"
               cols="0"
               rows="16"
               onChange={handleChange}
@@ -124,7 +124,7 @@ const Add = () => {
               name="shortDesc"
               onChange={handleChange}
               id=""
-              placeholder="Short description of your project"
+              placeholder="Description of your project"
               cols="30"
               rows="10"
             ></textarea>

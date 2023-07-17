@@ -63,6 +63,9 @@ const Message = () => {
         <form className="write" onSubmit={handleSubmit}>
           <textarea type="text" placeholder="write a message" />
           <button type="submit">Send</button>
+          {currentUser.isSeller && <Link to={`/pay/64b4391e73b287de5034c2cc`}>
+              <button>Pay now</button>
+            </Link> }
           
         </form>
       </div>

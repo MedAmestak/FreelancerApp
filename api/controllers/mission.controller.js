@@ -3,7 +3,7 @@ import createError from "../utils/createError.js";
 
 export const createMission = async (req, res, next) => {
   if (!req.isSeller)
-    return next(createError(403, "Only sellers can create a mission!"));
+    return next(createError(403, "Only clients can create a mission!"));
 
   const newMission = new Mission({
     userId: req.userId,
@@ -58,4 +58,3 @@ export const getMissions = async (req, res, next) => {
     next(err);
   }
 };
-

@@ -6,7 +6,7 @@ import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
 
 function Missions() {
-  const [sort, setSort] = useState("sales");
+  const [sort, setSort] = useState("views");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
@@ -56,17 +56,17 @@ function Missions() {
           <div className="right">
             <span className="sortBy">Sort by</span>
             <span className="sortType">
-              {sort === "sales" ? "Best Client" : "Newest"}
+              {sort === "views" ? "Best Client" : "Newest"}
             </span>
             <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
             {open && (
               <div className="rightMenu">
-                {sort === "sales" ? (
+                {sort === "views" ? (
                   <span onClick={() => reSort("createdAt")}>Newest</span>
                 ) : (
-                  <span onClick={() => reSort("sales")}>Best Client</span>
+                  <span onClick={() => reSort("views")}>Best Client</span>
                 )}
-                <span onClick={() => reSort("sales")}>Popular</span>
+                <span onClick={() => reSort("views")}>Popular</span>
               </div>
             )}
           </div>

@@ -65,7 +65,7 @@ console.log("Missions Data:", data);
                 </td>
                 <td>{mission.title}</td>
                 <td>{mission.price}</td>
-                <td>{mission.sales}</td>
+                <td>{mission.views}</td>
                 <td>
                   <img
                     className="delete"

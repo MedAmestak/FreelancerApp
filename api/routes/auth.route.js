@@ -6,7 +6,7 @@ import authenticate from "../middleware/authenticate.js";
 
 const router = express.Router();
 
-router.get("/orders", authenticate, getOrders);
+//router.get("/orders", authenticate, getOrders);
 router.get("/mymissions", authenticate, getMissions);
 
 router.post("/register", register);

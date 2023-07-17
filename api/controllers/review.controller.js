@@ -4,7 +4,7 @@ import Mission from "../models/mission.model.js";
 
 export const createReview = async (req, res, next) => {
   if (req.isSeller)
-    return next(createError(403, "Sellers can't create a review!"));
+    return next(createError(403, "Clients can't create a review!"));
 
   const newReview = new Review({
     userId: req.userId,

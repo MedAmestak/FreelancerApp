@@ -4,11 +4,13 @@ import Mission from "../models/mission.model.js";
 import Stripe from "stripe";
 
 export const intent = async (req, res, next) => {
+
   const stripe = new Stripe(process.env.STRIPE);
 
   const mission = await Mission.findById(req.params.id);
 
   const paymentIntent = await stripe.paymentIntents.create({
+
     amount: mission.price * 100,
     currency: "usd",
     automatic_payment_methods: {
@@ -20,7 +22,7 @@ export const intent = async (req, res, next) => {
     missionId: mission._id,
     img: mission.cover,
     title: mission.title,
-    buyerId: req.userId,
+    buyerId: id,
     sellerId: mission.userId,
     price: mission.price,
     payment_intent: paymentIntent.id,
@@ -34,15 +36,18 @@ export const intent = async (req, res, next) => {
 };
 
 export const getOrders = async (req, res, next) => {
+  const id = req.params.id.trim()
+
   try {
+
     const orders = await Order.find({
-      ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
-      isCompleted: true,
+       buyerId: id ,
     });
 
 
     res.status(200).send(orders);
   } catch (err) {
+    console.log(err, 'ghaalat')
     next(err);
   }
 };
@@ -79,10 +84,10 @@ export const submitMission = async (req, res, next) => {
       missionId: mission._id,
       img: mission.cover,
       title: mission.title,
-      buyerId: id,
+      buyerId: req.userId,
       sellerId: mission.userId,
       price: mission.price,
-      payment_intent: null, // Set payment_intent to null for gig submission without payment
+      payment_intent: null, // Set payment_intent to null for mission submission without payment
     });
     console.log("New Order:", newOrder); // Add this line
 

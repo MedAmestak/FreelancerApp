@@ -48,7 +48,6 @@ function Footer() {
             <span>FreelancerApp Guides</span>
             <span>Get Inspired</span>
             <span>FreelancerApp Select</span>
-            <span>FreelancerApp Workspace</span>
             <span>Learn</span>
             <span>Working Not Working</span>
           </div>

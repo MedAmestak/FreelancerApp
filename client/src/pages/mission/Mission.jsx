@@ -72,7 +72,7 @@ function Mission() {
 
   const handleTestMissionSubmission = async () => {
     //try {
-      // Make an API request to submit the gig without payment
+      // Make an API request to submit the mission without payment
       //await newRequest.post(`/submit-mission/${id}`);
 
       // Redirect the user to the orders tab
@@ -87,9 +87,8 @@ function Mission() {
 
   const makeRequest = async () => {
     try {
-      await newRequest.post(
-        `/orders/submit-mission/${id}`
-      );
+      console.log(id)
+      await newRequest.post(`/orders/submit-mission/${id}`);
       navigate("/orders")
       window.scrollTo(0, 0);
 
@@ -224,9 +223,7 @@ function Mission() {
                 </div>
               ))}
             </div>
-            <Link to={`/pay/${id}`}>
-              <button>Continue</button>
-            </Link>
+            
        
               <button onClick={makeRequest}>Submit the Mission</button>
 

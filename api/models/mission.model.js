@@ -59,7 +59,7 @@ const MissionSchema = new Schema(
       type: [String],
       required: false,
     },
-    sales: {
+    views: {
       type: Number,
       default: 0,
     },
